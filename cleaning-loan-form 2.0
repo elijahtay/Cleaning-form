@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cleaning Equipment Loan</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:#f0f2f8;min-height:100vh;padding:1.5rem 1rem 3rem;}
+.wrap{max-width:520px;margin:0 auto;}
+.header{background:#1a1a2e;border-radius:16px;padding:1.5rem;margin-bottom:1.25rem;text-align:center;}
+.header h1{color:#fff;font-size:22px;font-weight:900;letter-spacing:-0.3px;}
+.header p{color:#a0a8c8;font-size:13px;margin-top:4px;}
+.ts-badge{display:inline-block;background:#2d2d4e;color:#7eb8f7;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;margin-top:10px;letter-spacing:0.3px;}
+.section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:#666;margin:1.25rem 0 0.6rem;}
+.eq-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0.5rem;}
+.eq-card{border-radius:12px;padding:14px 14px 12px;cursor:pointer;border:2.5px solid transparent;transition:transform 0.12s,border-color 0.15s;user-select:none;position:relative;}
+.eq-card:active{transform:scale(0.97);}
+.eq-card.red-theme{background:#fff0ee;}
+.eq-card.blue-theme{background:#edf4ff;}
+.eq-card.gray-theme{background:#f3f3f0;}
+.eq-card.checked.red-theme{border-color:#e05a3a;}
+.eq-card.checked.blue-theme{border-color:#3a7de0;}
+.eq-card.checked.gray-theme{border-color:#888;}
+.eq-icon{font-size:28px;margin-bottom:6px;}
+.eq-label{font-size:14px;font-weight:800;line-height:1.3;}
+.eq-sublabel{font-size:12px;font-weight:600;margin-top:2px;}
+.eq-card.red-theme .eq-label{color:#9b2d11;}
+.eq-card.red-theme .eq-sublabel{color:#c2401f;}
+.eq-card.blue-theme .eq-label{color:#0c3d82;}
+.eq-card.blue-theme .eq-sublabel{color:#1a5cbf;}
+.eq-card.gray-theme .eq-label{color:#2c2c2a;}
+.eq-card.gray-theme .eq-sublabel{color:#5f5e5a;}
+.check-circle{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;transition:background 0.15s;}
+.eq-card.red-theme .check-circle{color:#e05a3a;}
+.eq-card.blue-theme .check-circle{color:#3a7de0;}
+.eq-card.gray-theme .check-circle{color:#888;}
+.eq-card.checked .check-circle{background:currentColor;}
+.check-circle svg{display:none;}
+.eq-card.checked .check-circle svg{display:block;}
+.instruction-box{background:#fffbea;border:1.5px solid #f5c842;border-radius:12px;padding:14px 16px;margin-bottom:0.5rem;}
+.instruction-box h3{font-size:13px;font-weight:800;color:#7a5800;margin-bottom:8px;}
+.instruction-box ul{padding-left:1.1rem;}
+.instruction-box li{font-size:13px;color:#6b4e00;line-height:1.6;margin-bottom:4px;font-weight:600;}
+.name-input{width:100%;border:2px solid #ddd;border-radius:10px;padding:11px 14px;font-size:15px;font-family:inherit;font-weight:600;outline:none;background:#fff;color:#1a1a2e;transition:border-color 0.15s;}
+.name-input:focus{border-color:#3a7de0;}
+.submit-btn{width:100%;background:#1a1a2e;color:#fff;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:800;font-family:inherit;cursor:pointer;margin-top:1.25rem;letter-spacing:0.3px;transition:background 0.15s,transform 0.1s;}
+.submit-btn:hover{background:#2d2d50;}
+.submit-btn:active{transform:scale(0.98);}
+.error-msg{font-size:12px;color:#e05a3a;font-weight:700;margin-top:6px;display:none;}
+.success-screen{text-align:center;padding:2rem 1rem;display:none;}
+.success-icon{width:64px;height:64px;background:#eaf3de;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+.success-screen h2{font-size:20px;font-weight:900;color:#1a1a2e;margin-bottom:6px;}
+.success-screen p{font-size:14px;color:#666;font-weight:600;}
+.password-reveal{background:#1a1a2e;border-radius:16px;padding:1.5rem;margin:1.5rem 0 1rem;text-align:center;}
+.password-reveal .pw-intro{color:#a0a8c8;font-size:13px;margin-bottom:10px;font-weight:600;}
+.password-reveal .lock-icon{font-size:32px;margin-bottom:8px;}
+.password-reveal .pw-value{color:#ffd166;font-size:40px;font-weight:900;letter-spacing:8px;}
+.password-reveal .pw-note{color:#7eb8f7;font-size:11px;margin-top:10px;font-weight:600;}
+.log-section{margin-top:1.5rem;}
+.log-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:#666;margin-bottom:0.6rem;display:flex;align-items:center;justify-content:space-between;}
+.log-clear{font-size:11px;color:#e05a3a;cursor:pointer;font-weight:700;text-transform:none;letter-spacing:0;}
+.log-entry{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;border:0.5px solid #e0e0e0;}
+.log-entry-name{font-size:14px;font-weight:800;color:#1a1a2e;}
+.log-entry-time{font-size:11px;color:#888;font-weight:600;margin-top:2px;}
+.log-entry-items{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.log-tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.log-tag.red{background:#fff0ee;color:#9b2d11;}
+.log-tag.blue{background:#edf4ff;color:#0c3d82;}
+.log-tag.gray{background:#f3f3f0;color:#2c2c2a;}
+.no-log{font-size:13px;color:#999;font-style:italic;text-align:center;padding:12px 0;font-weight:600;}
+.admin-trigger{text-align:center;margin-top:2.5rem;}
+.admin-trigger span{font-size:11px;color:#ccc;cursor:pointer;user-select:none;padding:8px;}
+.admin-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:100;}
+.admin-overlay.open{display:flex;align-items:center;justify-content:center;}
+.admin-modal{background:#fff;border-radius:20px;padding:1.5rem;width:92%;max-width:460px;max-height:88vh;overflow-y:auto;}
+.admin-modal h2{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:4px;}
+.admin-subtitle{font-size:12px;color:#888;font-weight:600;margin-bottom:1.25rem;}
+.admin-section{margin-bottom:1.25rem;}
+.admin-section label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#666;display:block;margin-bottom:6px;}
+.admin-input{width:100%;border:2px solid #ddd;border-radius:10px;padding:10px 14px;font-size:14px;font-family:inherit;font-weight:600;outline:none;color:#1a1a2e;background:#fff;transition:border-color 0.15s;}
+.admin-input:focus{border-color:#3a7de0;}
+textarea.admin-input{resize:vertical;min-height:90px;}
+.admin-btn{background:#1a1a2e;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:800;font-family:inherit;cursor:pointer;transition:background 0.15s;}
+.admin-btn:hover{background:#2d2d50;}
+.admin-btn.danger{background:#e05a3a;}
+.admin-btn.danger:hover{background:#c04428;}
+.admin-btn.secondary{background:#eee;color:#444;}
+.admin-btn.secondary:hover{background:#ddd;}
+.admin-row{display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap;}
+.save-msg{font-size:12px;color:#3a7de0;font-weight:700;display:none;}
+.month-badge{display:inline-block;background:#edf4ff;color:#0c3d82;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-left:6px;}
+.pw-months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+.pw-month-cell{border:1.5px solid #eee;border-radius:10px;padding:8px 10px;}
+.pw-month-cell.current{border-color:#3a7de0;background:#edf4ff;}
+.pw-month-cell label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#888;display:block;margin-bottom:4px;}
+.pw-month-cell.current label{color:#0c3d82;}
+.pw-month-cell input{width:100%;border:none;border-bottom:1.5px solid #ddd;font-size:15px;font-family:inherit;font-weight:800;color:#1a1a2e;outline:none;padding:2px 0;background:transparent;}
+.close-btn{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:#aaa;font-weight:700;line-height:1;margin-top:-4px;}
+.divider{border:none;border-top:1px solid #eee;margin:1.25rem 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- FORM -->
+  <div id="formView">
+    <div class="header">
+      <div style="font-size:28px;margin-bottom:6px;">🧹</div>
+      <h1>Cleaning Equipment Loan</h1>
+      <p>Select what you are taking. Timestamp is recorded automatically.</p>
+      <div class="ts-badge" id="liveTs">Loading time...</div>
+    </div>
+
+    <div class="section-title">Select items taken</div>
+    <div class="eq-grid">
+      <div class="eq-card red-theme" data-item="Red Mop" data-color="red" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🧹</div>
+        <div class="eq-label">Red Mop</div>
+        <div class="eq-sublabel">Toilet use only</div>
+      </div>
+      <div class="eq-card blue-theme" data-item="Blue Mop" data-color="blue" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🧹</div>
+        <div class="eq-label">Blue Mop</div>
+        <div class="eq-sublabel">General area</div>
+      </div>
+      <div class="eq-card red-theme" data-item="Red Pail" data-color="red" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🪣</div>
+        <div class="eq-label">Red Pail</div>
+        <div class="eq-sublabel">Toilet use only</div>
+      </div>
+      <div class="eq-card blue-theme" data-item="Blue Pail" data-color="blue" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🪣</div>
+        <div class="eq-label">Blue Pail</div>
+        <div class="eq-sublabel">General area</div>
+      </div>
+      <div class="eq-card gray-theme" data-item="Broom" data-color="gray" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🧹</div>
+        <div class="eq-label">Broom</div>
+        <div class="eq-sublabel">General use</div>
+      </div>
+      <div class="eq-card gray-theme" data-item="Dustpan" data-color="gray" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🧺</div>
+        <div class="eq-label">Dustpan</div>
+        <div class="eq-sublabel">General use</div>
+      </div>
+    </div>
+
+    <div class="section-title">Cleaning instructions</div>
+    <div class="instruction-box">
+      <h3>⚠️ Please follow before returning</h3>
+      <ul id="instructionList"></ul>
+    </div>
+
+    <div class="section-title" style="margin-top:1.25rem;">Your name</div>
+    <input class="name-input" type="text" id="nameInput" placeholder="Enter your name" maxlength="60"/>
+    <div class="error-msg" id="errMsg">Please enter your name and select at least one item.</div>
+    <button class="submit-btn" onclick="submitForm()">Submit &amp; Get Locker Password 🔒</button>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successView">
+    <div class="success-icon">
+      <svg viewBox="0 0 32 32" fill="none" width="32" height="32"><circle cx="16" cy="16" r="15" fill="#c0dd97"/><polyline points="8,16 13,21 24,11" stroke="#3B6D11" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Logged successfully!</h2>
+    <p id="successMsg"></p>
+    <div class="password-reveal">
+      <div class="lock-icon">🔒</div>
+      <div class="pw-intro">This month's locker combination:</div>
+      <div class="pw-value" id="pwDisplay">----</div>
+      <div class="pw-note">Valid for this month only. Please do not share.</div>
+    </div>
+    <button class="submit-btn" style="background:#3a7de0;" onclick="newEntry()">Log Another Entry</button>
+  </div>
+
+  <!-- LOG -->
+  <div class="log-section">
+    <div class="log-title">
+      <span>Submission log</span>
+      <span class="log-clear" onclick="clearLog()">Clear all</span>
+    </div>
+    <div id="logList"></div>
+  </div>
+
+  <div class="admin-trigger">
+    <span onclick="openAdmin()">⚙ Admin</span>
+  </div>
+</div>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay" onclick="overlayClick(event)">
+  <div class="admin-modal">
+
+    <!-- Login -->
+    <div id="adminLogin">
+      <button class="close-btn" onclick="closeAdmin()">✕</button>
+      <h2>Admin Panel</h2>
+      <div class="admin-subtitle">Enter your admin password to continue</div>
+      <div class="admin-section">
+        <label>Admin password</label>
+        <input class="admin-input" type="password" id="adminPwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdmin()"/>
+        <div class="error-msg" id="adminErr">Incorrect password. Try again.</div>
+      </div>
+      <div class="admin-row">
+        <button class="admin-btn" onclick="checkAdmin()">Login</button>
+        <button class="admin-btn secondary" onclick="closeAdmin()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Panel -->
+    <div id="adminPanel" style="display:none;">
+      <button class="close-btn" onclick="closeAdmin()">✕</button>
+      <h2>Admin Panel</h2>
+      <div class="admin-subtitle">Manage passwords, instructions and log</div>
+
+      <div class="admin-section">
+        <label>Monthly locker passwords <span class="month-badge" id="curMonthBadge"></span></label>
+        <div class="pw-months-grid" id="pwGrid"></div>
+        <div class="admin-row">
+          <button class="admin-btn" onclick="savePasswords()">Save passwords</button>
+          <span class="save-msg" id="pwMsg">Saved ✓</span>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <div class="admin-section">
+        <label>Cleaning instructions <span style="font-size:10px;font-weight:600;color:#aaa;text-transform:none;letter-spacing:0;">(one per line)</span></label>
+        <textarea class="admin-input" id="instrEdit"></textarea>
+        <div class="admin-row">
+          <button class="admin-btn" onclick="saveInstructions()">Save instructions</button>
+          <span class="save-msg" id="instrMsg">Saved ✓</span>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <div class="admin-section">
+        <label>Change admin password</label>
+        <input class="admin-input" type="password" id="newAdminPw" placeholder="New password"/>
+        <div class="admin-row">
+          <button class="admin-btn" onclick="changeAdminPw()">Update password</button>
+          <span class="save-msg" id="adminPwMsg">Updated ✓</span>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <div class="admin-section">
+        <label>Submission log</label>
+        <div class="admin-row">
+          <button class="admin-btn" onclick="exportLog()">Export CSV</button>
+          <button class="admin-btn danger" onclick="adminClearLog()">Clear log</button>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <button class="admin-btn secondary" onclick="closeAdmin()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function pad(n){return String(n).padStart(2,'0');}
+function fmtTs(d){var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];return days[d.getDay()]+', '+pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());}
+
+var tsEl=document.getElementById('liveTs');
+function tick(){tsEl.textContent='Accessed: '+fmtTs(new Date());}
+tick();setInterval(tick,1000);
+var accessTs=fmtTs(new Date());
+
+function gs(k,d){try{var v=localStorage.getItem(k);return v!==null?v:d;}catch(e){return d;}}
+function ss(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
+var DEFAULT_PW={Jan:'1234',Feb:'2345',Mar:'3456',Apr:'4567',May:'5678',Jun:'6789',Jul:'7890',Aug:'8901',Sep:'9012',Oct:'0123',Nov:'1357',Dec:'2468'};
+function getPws(){try{var s=localStorage.getItem('monthlyPws');return s?JSON.parse(s):DEFAULT_PW;}catch(e){return DEFAULT_PW;}}
+function getCurrentPw(){var pws=getPws();return pws[MONTHS[new Date().getMonth()]]||'----';}
+
+var DEFAULT_INSTRS=['Wash the mop in the shower cubicles after use.','Hang the wet mop back on the metal hook on the side of the cabinet.','Turn the pail upside down so excess water drips out — do not leave water sitting inside.','Red = Toilet only | Blue = General area. Do not mix.'];
+function getInstrs(){var s=gs('instructions','');return s?s.split('\n').filter(function(l){return l.trim();}):DEFAULT_INSTRS;}
+function renderInstrs(){document.getElementById('instructionList').innerHTML=getInstrs().map(function(l){return'<li>'+l+'</li>';}).join('');}
+renderInstrs();
+
+function toggle(card){card.classList.toggle('checked');}
+
+var log=[];
+try{var _s=localStorage.getItem('cleaningLog');if(_s)log=JSON.parse(_s);}catch(e){}
+function saveLog(){try{localStorage.setItem('cleaningLog',JSON.stringify(log));}catch(e){}}
+function renderLog(){
+  var el=document.getElementById('logList');
+  if(!log.length){el.innerHTML='<div class="no-log">No submissions yet.</div>';return;}
+  el.innerHTML=log.slice().reverse().map(function(e){
+    return'<div class="log-entry"><div class="log-entry-name">'+e.name+'</div><div class="log-entry-time">'+e.ts+'</div><div class="log-entry-items">'+e.items.map(function(i){return'<span class="log-tag '+i.color+'">'+i.name+'</span>';}).join('')+'</div></div>';
+  }).join('');
+}
+renderLog();
+
+function submitForm(){
+  var name=document.getElementById('nameInput').value.trim();
+  var checked=[].slice.call(document.querySelectorAll('.eq-card.checked'));
+  var errEl=document.getElementById('errMsg');
+  if(!name||!checked.length){errEl.style.display='block';return;}
+  errEl.style.display='none';
+  var items=checked.map(function(c){return{name:c.dataset.item,color:c.dataset.color};});
+  var ts=fmtTs(new Date());
+  log.push({name:name,ts:ts,items:items,accessTs:accessTs});
+  saveLog();
+  document.getElementById('successMsg').textContent=name+' — '+ts;
+  document.getElementById('pwDisplay').textContent=getCurrentPw();
+  document.getElementById('formView').style.display='none';
+  document.getElementById('successView').style.display='block';
+  renderLog();
+}
+
+function newEntry(){
+  document.getElementById('nameInput').value='';
+  [].slice.call(document.querySelectorAll('.eq-card.checked')).forEach(function(c){c.classList.remove('checked');});
+  document.getElementById('successView').style.display='none';
+  document.getElementById('formView').style.display='block';
+}
+
+function clearLog(){if(confirm('Clear all records?')){log=[];saveLog();renderLog();}}
+
+function openAdmin(){
+  document.getElementById('adminOverlay').classList.add('open');
+  document.getElementById('adminLogin').style.display='block';
+  document.getElementById('adminPanel').style.display='none';
+  document.getElementById('adminPwInput').value='';
+  document.getElementById('adminErr').style.display='none';
+}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
+function overlayClick(e){if(e.target===document.getElementById('adminOverlay'))closeAdmin();}
+
+function checkAdmin(){
+  var entered=document.getElementById('adminPwInput').value;
+  if(entered===gs('adminPassword','admin1234')){
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminPanel').style.display='block';
+    loadPanel();
+  } else {
+    document.getElementById('adminErr').style.display='block';
+  }
+}
+
+function loadPanel(){
+  var curM=MONTHS[new Date().getMonth()];
+  document.getElementById('curMonthBadge').textContent='Current: '+curM;
+  var pws=getPws();
+  document.getElementById('pwGrid').innerHTML=MONTHS.map(function(m){
+    var isCur=m===curM;
+    return'<div class="pw-month-cell'+(isCur?' current':'')+'"><label>'+m+(isCur?' ★':'')+'</label><input type="text" maxlength="12" value="'+(pws[m]||'')+'" id="pw_'+m+'"/></div>';
+  }).join('');
+  document.getElementById('instrEdit').value=getInstrs().join('\n');
+}
+
+function savePasswords(){
+  var pws={};
+  MONTHS.forEach(function(m){var el=document.getElementById('pw_'+m);if(el)pws[m]=el.value.trim()||'----';});
+  localStorage.setItem('monthlyPws',JSON.stringify(pws));
+  flash('pwMsg');
+}
+
+function saveInstructions(){
+  ss('instructions',document.getElementById('instrEdit').value.trim());
+  renderInstrs();
+  flash('instrMsg');
+}
+
+function changeAdminPw(){
+  var v=document.getElementById('newAdminPw').value.trim();
+  if(!v)return;
+  ss('adminPassword',v);
+  document.getElementById('newAdminPw').value='';
+  flash('adminPwMsg');
+}
+
+function flash(id){var el=document.getElementById(id);el.style.display='inline';setTimeout(function(){el.style.display='none';},2500);}
+
+function exportLog(){
+  if(!log.length){alert('No submissions to export.');return;}
+  var rows=['Name,Timestamp,Access Timestamp,Items'];
+  log.forEach(function(e){rows.push('"'+e.name+'","'+e.ts+'","'+(e.accessTs||'')+'","'+e.items.map(function(i){return i.name;}).join(', ')+'"');});
+  var blob=new Blob([rows.join('\n')],{type:'text/csv'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='cleaning-log.csv';a.click();URL.revokeObjectURL(url);
+}
+
+function adminClearLog(){if(confirm('Permanently clear all submission records?')){log=[];saveLog();renderLog();}}
+</script>
+</body>
+</html>
