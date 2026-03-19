@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cleaning Equipment Loan</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:#f0f2f8;min-height:100vh;padding:1.5rem 1rem 3rem;}
+  .wrap{max-width:520px;margin:0 auto;}
+  .header{background:#1a1a2e;border-radius:16px;padding:1.5rem;margin-bottom:1.25rem;text-align:center;}
+  .header h1{color:#fff;font-size:22px;font-weight:900;letter-spacing:-0.3px;}
+  .header p{color:#a0a8c8;font-size:13px;margin-top:4px;}
+  .ts-badge{display:inline-block;background:#2d2d4e;color:#7eb8f7;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;margin-top:10px;letter-spacing:0.3px;}
+  .section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:#666;margin:1.25rem 0 0.6rem;}
+  .eq-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0.5rem;}
+  .eq-card{border-radius:12px;padding:14px 14px 12px;cursor:pointer;border:2.5px solid transparent;transition:transform 0.12s,border-color 0.15s;user-select:none;position:relative;}
+  .eq-card:active{transform:scale(0.97);}
+  .eq-card.red-theme{background:#fff0ee;}
+  .eq-card.blue-theme{background:#edf4ff;}
+  .eq-card.gray-theme{background:#f3f3f0;}
+  .eq-card.checked.red-theme{border-color:#e05a3a;}
+  .eq-card.checked.blue-theme{border-color:#3a7de0;}
+  .eq-card.checked.gray-theme{border-color:#888;}
+  .eq-icon{font-size:28px;margin-bottom:6px;}
+  .eq-label{font-size:14px;font-weight:800;line-height:1.3;}
+  .eq-sublabel{font-size:12px;font-weight:600;margin-top:2px;}
+  .eq-card.red-theme .eq-label{color:#9b2d11;}
+  .eq-card.red-theme .eq-sublabel{color:#c2401f;}
+  .eq-card.blue-theme .eq-label{color:#0c3d82;}
+  .eq-card.blue-theme .eq-sublabel{color:#1a5cbf;}
+  .eq-card.gray-theme .eq-label{color:#2c2c2a;}
+  .eq-card.gray-theme .eq-sublabel{color:#5f5e5a;}
+  .check-circle{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;transition:background 0.15s;}
+  .eq-card.red-theme .check-circle{color:#e05a3a;}
+  .eq-card.blue-theme .check-circle{color:#3a7de0;}
+  .eq-card.gray-theme .check-circle{color:#888;}
+  .eq-card.checked .check-circle{background:currentColor;}
+  .check-circle svg{display:none;}
+  .eq-card.checked .check-circle svg{display:block;}
+  .instruction-box{background:#fffbea;border:1.5px solid #f5c842;border-radius:12px;padding:14px 16px;margin-bottom:0.5rem;}
+  .instruction-box h3{font-size:13px;font-weight:800;color:#7a5800;margin-bottom:8px;}
+  .instruction-box ul{padding-left:1.1rem;}
+  .instruction-box li{font-size:13px;color:#6b4e00;line-height:1.6;margin-bottom:4px;font-weight:600;}
+  .name-input{width:100%;border:2px solid #ddd;border-radius:10px;padding:11px 14px;font-size:15px;font-family:inherit;font-weight:600;outline:none;background:#fff;color:#1a1a2e;transition:border-color 0.15s;}
+  .name-input:focus{border-color:#3a7de0;}
+  .submit-btn{width:100%;background:#1a1a2e;color:#fff;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:800;font-family:inherit;cursor:pointer;margin-top:1.25rem;letter-spacing:0.3px;transition:background 0.15s,transform 0.1s;}
+  .submit-btn:hover{background:#2d2d50;}
+  .submit-btn:active{transform:scale(0.98);}
+  .success-screen{text-align:center;padding:2rem 1rem;display:none;}
+  .success-icon{width:64px;height:64px;background:#eaf3de;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+  .success-screen h2{font-size:20px;font-weight:900;color:#1a1a2e;margin-bottom:6px;}
+  .success-screen p{font-size:14px;color:#666;font-weight:600;}
+  .log-section{margin-top:1.5rem;}
+  .log-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:#666;margin-bottom:0.6rem;display:flex;align-items:center;justify-content:space-between;}
+  .log-clear{font-size:11px;color:#e05a3a;cursor:pointer;font-weight:700;text-transform:none;letter-spacing:0;}
+  .log-entry{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;border:0.5px solid #e0e0e0;}
+  .log-entry-name{font-size:14px;font-weight:800;color:#1a1a2e;}
+  .log-entry-time{font-size:11px;color:#888;font-weight:600;margin-top:2px;}
+  .log-entry-items{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+  .log-tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .log-tag.red{background:#fff0ee;color:#9b2d11;}
+  .log-tag.blue{background:#edf4ff;color:#0c3d82;}
+  .log-tag.gray{background:#f3f3f0;color:#2c2c2a;}
+  .no-log{font-size:13px;color:#999;font-style:italic;text-align:center;padding:12px 0;font-weight:600;}
+  .error-msg{font-size:12px;color:#e05a3a;font-weight:700;margin-top:6px;display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="formView">
+    <div class="header">
+      <div style="font-size:28px;margin-bottom:6px;">🧹</div>
+      <h1>Cleaning Equipment Loan</h1>
+      <p>Select what you are taking. Timestamp is recorded automatically.</p>
+      <div class="ts-badge" id="liveTs">Loading time...</div>
+    </div>
+
+    <div class="section-title">Select items taken</div>
+    <div class="eq-grid">
+      <div class="eq-card red-theme" data-item="Red Mop" data-color="red" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🪣</div>
+        <div class="eq-label">Red Mop</div>
+        <div class="eq-sublabel">Toilet use only</div>
+      </div>
+      <div class="eq-card blue-theme" data-item="Blue Mop" data-color="blue" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🪣</div>
+        <div class="eq-label">Blue Mop</div>
+        <div class="eq-sublabel">General area</div>
+      </div>
+      <div class="eq-card red-theme" data-item="Red Pail" data-color="red" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🪣</div>
+        <div class="eq-label">Red Pail</div>
+        <div class="eq-sublabel">Toilet use only</div>
+      </div>
+      <div class="eq-card blue-theme" data-item="Blue Pail" data-color="blue" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🪣</div>
+        <div class="eq-label">Blue Pail</div>
+        <div class="eq-sublabel">General area</div>
+      </div>
+      <div class="eq-card gray-theme" data-item="Broom" data-color="gray" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🧹</div>
+        <div class="eq-label">Broom</div>
+        <div class="eq-sublabel">General use</div>
+      </div>
+      <div class="eq-card gray-theme" data-item="Dustpan" data-color="gray" onclick="toggle(this)">
+        <div class="check-circle"><svg viewBox="0 0 12 10" fill="none" width="12" height="10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="eq-icon">🧺</div>
+        <div class="eq-label">Dustpan</div>
+        <div class="eq-sublabel">General use</div>
+      </div>
+    </div>
+
+    <div class="section-title">Cleaning instructions</div>
+    <div class="instruction-box">
+      <h3>⚠️ Please follow before returning</h3>
+      <ul>
+        <li>Wash the mop in the shower cubicles after use.</li>
+        <li>Hang the wet mop back on the metal hook on the side of the cabinet.</li>
+        <li>Turn the pail upside down so excess water drips out — do not leave water sitting inside.</li>
+        <li>Red = Toilet only &nbsp;|&nbsp; Blue = General area. Do not mix.</li>
+      </ul>
+    </div>
+
+    <div class="section-title" style="margin-top:1.25rem;">Your name</div>
+    <input class="name-input" type="text" id="nameInput" placeholder="Enter your name" maxlength="60"/>
+    <div class="error-msg" id="errMsg">Please enter your name and select at least one item.</div>
+
+    <button class="submit-btn" onclick="submitForm()">Submit &amp; Record</button>
+  </div>
+
+  <div class="success-screen" id="successView">
+    <div class="success-icon">
+      <svg viewBox="0 0 32 32" fill="none" width="32" height="32"><circle cx="16" cy="16" r="15" fill="#c0dd97"/><polyline points="8,16 13,21 24,11" stroke="#3B6D11" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Logged successfully!</h2>
+    <p id="successMsg">Your borrowing has been recorded.</p>
+    <button class="submit-btn" style="margin-top:1.5rem;background:#3a7de0;" onclick="newEntry()">Log Another Entry</button>
+  </div>
+
+  <div class="log-section" id="logSection">
+    <div class="log-title">
+      <span>Submission log</span>
+      <span class="log-clear" onclick="clearLog()">Clear all</span>
+    </div>
+    <div id="logList"></div>
+  </div>
+</div>
+
+<script>
+  function pad(n){return String(n).padStart(2,'0');}
+  function fmtTs(d){var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];return days[d.getDay()]+', '+pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());}
+  var tsEl=document.getElementById('liveTs');
+  function tick(){tsEl.textContent='Accessed: '+fmtTs(new Date());}
+  tick();setInterval(tick,1000);
+  var accessTs=fmtTs(new Date());
+
+  function toggle(card){card.classList.toggle('checked');}
+
+  var log=[];
+  try{var stored=localStorage.getItem('cleaningLog');if(stored)log=JSON.parse(stored);}catch(e){}
+
+  function saveLog(){try{localStorage.setItem('cleaningLog',JSON.stringify(log));}catch(e){}}
+  function renderLog(){
+    var el=document.getElementById('logList');
+    if(!log.length){el.innerHTML='<div class="no-log">No submissions yet.</div>';return;}
+    el.innerHTML=log.slice().reverse().map(function(e){
+      return '<div class="log-entry"><div class="log-entry-name">'+e.name+'</div><div class="log-entry-time">'+e.ts+'</div><div class="log-entry-items">'+e.items.map(function(i){return '<span class="log-tag '+i.color+'">'+i.name+'</span>';}).join('')+'</div></div>';
+    }).join('');
+  }
+  renderLog();
+
+  function submitForm(){
+    var name=document.getElementById('nameInput').value.trim();
+    var checked=[].slice.call(document.querySelectorAll('.eq-card.checked'));
+    var errEl=document.getElementById('errMsg');
+    if(!name||!checked.length){errEl.style.display='block';return;}
+    errEl.style.display='none';
+    var items=checked.map(function(c){return{name:c.dataset.item,color:c.dataset.color};});
+    var ts=fmtTs(new Date());
+    log.push({name:name,ts:ts,items:items,accessTs:accessTs});
+    saveLog();
+    document.getElementById('successMsg').textContent=name+' — '+ts;
+    document.getElementById('formView').style.display='none';
+    document.getElementById('successView').style.display='block';
+    renderLog();
+  }
+
+  function newEntry(){
+    document.getElementById('nameInput').value='';
+    [].slice.call(document.querySelectorAll('.eq-card.checked')).forEach(function(c){c.classList.remove('checked');});
+    document.getElementById('successView').style.display='none';
+    document.getElementById('formView').style.display='block';
+  }
+
+  function clearLog(){
+    if(confirm('Clear all submission records?')){log=[];saveLog();renderLog();}
+  }
+</script>
+</body>
+</html>
